@@ -119,17 +119,27 @@ const fillCountryData = (countriesData) => {
 
 window.addEventListener('load', getCountries);
 
-// Add event listener for accordion to toggle details
-accordion.forEach(acc => {
-    acc.addEventListener('click', () => {
-        acc.classList.toggle('active');
+// Event Listener for card accordions
+cardsContainer.addEventListener('click', (evt) => {
+    if(evt.target.className === 'accordion') {
+        let panel = evt.target.nextElementSibling;
+        const up = evt.target.querySelector('.fa-caret-up');
+        const down = evt.target.querySelector('.fa-caret-down');
 
-        let panel = acc.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            up.style.display = 'none';
+            down.style.display= 'block';
+            panel.classList.toggle('drop');
         } else {
-            panel.style.display = "block";
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            up.style.display = 'block';
+            down.style.display= 'none';
+            setTimeout(() => {
+                panel.classList.toggle('drop');
+            }, 500);
         }
-    });
-
+    } else {
+        null;
+    }
 })

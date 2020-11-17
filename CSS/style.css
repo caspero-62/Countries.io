@@ -56,12 +56,24 @@ img.background-spiders{
     left: 3vw;
 }
 
-h1{
+nav{
     font-family: 'Stalinist One', cursive;
-    text-align: center;
-    padding: 1.5rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #6fb5fa;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    z-index: 999;
+    box-shadow: 0 5px 6px -6px #6fb5fa;
 }
 
+nav a i{
+    color: #298aeb;
+    font-size: 1.5rem;
+    margin-right: .7rem;
+}
 
 /* General Styles End */
 
@@ -70,13 +82,10 @@ section.cards-container{
     width: 100%;
     height: auto;
     padding: 1rem;
+    margin-top: 20vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    /* This is better for small screens, once min() is better supported */
-    /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
     grid-gap: 2rem;
-    /* This is the standardized property now, but has slightly less support */
-    /* gap: 1rem */
 }
 
 .card{
@@ -112,10 +121,6 @@ section.cards-container{
     outline: none;
     transition: 0.4s;
 }
-  
-.active, .accordion:hover {
-    background-color: #FCEDE0;
-}
 
 
 /* Arrow Icons */
@@ -137,11 +142,15 @@ section.cards-container{
     width: 85%;
     margin: 1.5rem auto 0;
     background-color: #fff;
-    /* max-height: 0;
-    transition: max-height 0.2s ease-out; */
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
     position: relative;
-    display: none;
-    /* overflow: hidden; */
+    
+    overflow: hidden;
+}
+
+.panel.drop{
+    overflow: visible;
 }
 
 .panel:after{
@@ -269,4 +278,40 @@ section.cards-container{
     color: #fff;
     font-weight: 500;
     padding: 1rem 1.5rem;
+}
+
+
+@media screen and (max-width: 760px) {
+    .card{
+        width: 80%;
+    }
+
+    section.cards-container{
+        margin-top: 30vh;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    nav{
+        padding: .7rem 1.5rem;
+        flex-direction: column;
+    }
+
+    nav h2, nav .icons{
+        margin-top: 1rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    
+    section.cards-container{
+        grid-gap: 0;
+        padding: 2rem 0;
+    }
+
+    .card{
+        min-width: 310px;
+        width: 90%;
+    }
 }
