@@ -1,11 +1,19 @@
 // initialize Elements;
+const nav = document.querySelector('nav');
+const inputForm = document.querySelector('.input-form');
+const search = document.querySelector('#search');
 const cardsContainer = document.querySelector(".cards-container");
 const accordion = document.querySelectorAll(".accordion");
 const spinner = document.querySelector(".spinner");
 const errorMessage = document.querySelector(".error-message");
 const errorMessageText = document.querySelector(".error-message div p");
+let storedCountriesData;
+
+inputForm.style.setProperty('margin-top', `${nav.offsetHeight + 16}px`, null);
+console.log(window.getComputedStyle(inputForm).marginTop);
 
 const getCountries = async () => {
+    
     spinner.classList.toggle('none');
     try {
 
@@ -13,6 +21,8 @@ const getCountries = async () => {
         let countriesData = await response.json();
 
         fillCountryData(countriesData);
+
+        storedCountriesData = countriesData;
 
         setTimeout(() => {
             spinner.classList.toggle('none');
@@ -115,7 +125,21 @@ const fillCountryData = (countriesData) => {
         cardsContainer.appendChild(card);
 
     })
-}
+};
+
+// Search for specific Country
+const searchCountry = () => {
+    let searchValue = search.value.toLowerCase();
+
+    let searchResult = storedCountriesData.filter((country) => {
+        const { name } = country;
+        return name.toLowerCase().includes(searchValue);
+    });
+
+    cardsContainer.innerHTML = '';
+
+    fillCountryData(searchResult);
+};
 
 window.addEventListener('load', getCountries);
 
@@ -132,7 +156,7 @@ cardsContainer.addEventListener('click', (evt) => {
             down.style.display= 'block';
             panel.classList.toggle('drop');
         } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
+            panel.style.maxHeight = `${panel.scrollHeight + 5}px`;
             up.style.display = 'block';
             down.style.display= 'none';
             setTimeout(() => {
@@ -142,4 +166,6 @@ cardsContainer.addEventListener('click', (evt) => {
     } else {
         null;
     }
-})
+});
+
+search.addEventListener('keyup', searchCountry);

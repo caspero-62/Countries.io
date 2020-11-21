@@ -78,14 +78,44 @@ nav a i{
 /* General Styles End */
 
 /* Section Styling */
+.input-form{
+    padding: 2rem 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search{
+    padding: .7rem 1rem;
+    min-width: 310px;
+    width: 40%;
+    border: none;
+    border: 1px solid #298aeb;
+    border-radius: 6px;
+}
+
+#search:hover, #search:focus{
+    outline: none;
+    box-shadow: 0px 0px 2px 3px #298aeb;
+    box-shadow:
+    0 2.8px 2.2px #298aeb09,
+    0 6.7px 5.3px #298aeb0c,
+    0 12.5px 10px #298aeb0f,
+    0 22.3px 17.9px #298aeb12,
+    0 41.8px 33.4px #298aeb16,
+    0 100px 80px #298aeb1f
+}
+
 section.cards-container{
     width: 100%;
     height: auto;
     padding: 1rem;
-    margin-top: 20vh;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    grid-gap: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .card{
@@ -285,10 +315,6 @@ section.cards-container{
     .card{
         width: 80%;
     }
-
-    section.cards-container{
-        margin-top: 30vh;
-    }
 }
 
 @media screen and (max-width: 475px) {
@@ -304,14 +330,17 @@ section.cards-container{
 }
 
 @media screen and (max-width: 380px) {
-    
+
+    .input-form{
+        padding-top: 5rem;
+    }
+
     section.cards-container{
-        grid-gap: 0;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
 
     .card{
-        min-width: 310px;
+        min-width: 315px;
         width: 90%;
     }
 }
